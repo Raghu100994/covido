@@ -14,7 +14,7 @@ ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.88/bin/apache-tomcat-9.0.88.ta
 RUN tar -xvzf apache-tomcat-9.0.88.tar.gz
 RUN rm apache-tomcat-9.0.88.tar.gz
 
-COPY target/sailor.war ${TOMCAT_HOME}/webapps
+COPY target/covido.war ${TOMCAT_HOME}/webapps
 COPY run.sh /tmp
 RUN chmod u+x /tmp/run.sh
 ENTRYPOINT [ "/tmp/run.sh" ]
