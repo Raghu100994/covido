@@ -1,4 +1,7 @@
 FROM ubuntu:24.04
+
+RUN apt-get update && apt-get install -y bash
+
 ENV JAVA_HOME=/u01/middleware/jdk-11.0.1
 ENV TOMCAT_HOME=/u01/middleware/apache-tomcat-9.0.89
 ENV PATH=$PATH:$JAVA_HOME/bin

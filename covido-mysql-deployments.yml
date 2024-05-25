@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: covidomysqldeployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      dbName: mysql
+      version: "8.0.37"
+  template:
+    metadata:
+      name: covidomysqlpod
+      labels:
+        dbName: mysql
+        version: "8.0.37"
+    spec:
+      containers:
+      - name: mysqlcontainer
+        image: mysql:8.0.37-debian
+        ports:
+        - name: mysqlport
+          containerPort: 3306
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: covidomysqlvol
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: covidomysqlsecret
+      volumes:
+      - name: covidomysqlvol
+        persistentVolumeClaim:
+          claimName: covidomysqlpvc
